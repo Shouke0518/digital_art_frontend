@@ -4,6 +4,7 @@ import MuuView from '../views/muu.vue';
 import TestView from '../views/test.vue'
 import CaterpillarView from '@/views/Caterpillar.vue';
 import MouseCodeView from '@/views/MouseCode.vue';
+import CowView from '@/views/Cow.vue';
 
 // 定義路由
 const routes = [
@@ -14,7 +15,8 @@ const routes = [
       { path: '/muu',  component: MuuView },
       { path: '/test',  component: TestView },
       { path: '/caterpillar',  component: CaterpillarView },
-      { path: '/mousecode',  component: MouseCodeView }
+      { path: '/mousecode',  component: MouseCodeView },
+      { path: '/cow',  component: CowView }
     ]
 
   }

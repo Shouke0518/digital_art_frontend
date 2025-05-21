@@ -16,4 +16,4 @@ RUN npm install
 COPY . .
 
 # 開發時執行 dev server
-CMD ["npm", "run", "dev", "--", "--host"]
+CMD ["npm", "run", "dev"]

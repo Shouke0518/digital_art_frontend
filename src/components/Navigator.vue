@@ -16,7 +16,7 @@
 
     grow
   >
-    <v-btn @click="handleSelect('/test')">
+    <v-btn @click="handleSelect('/cow')">
       <span>任務一</span>
     </v-btn>
 
