@@ -1,9 +1,24 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import MainLayout from '../layouts/MainLayout.vue'
 import MuuView from '../views/muu.vue';
+import TestView from '../views/test.vue'
+import CaterpillarView from '@/views/Caterpillar.vue';
+import MouseCodeView from '@/views/MouseCode.vue';
 
 // 定義路由
 const routes = [
-  { path: '/muu',  component: MuuView },
+  {
+    path: '/',
+    component: MainLayout,
+    children: [
+      { path: '/muu',  component: MuuView },
+      { path: '/test',  component: TestView },
+      { path: '/caterpillar',  component: CaterpillarView },
+      { path: '/mousecode',  component: MouseCodeView }
+    ]
+
+  }
+
 ];
 
 // 創建路由instance
