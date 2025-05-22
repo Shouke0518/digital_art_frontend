@@ -15,5 +15,9 @@ RUN npm install
 # 複製所有原始碼
 COPY . .
 
+# 設置環境變數
+ENV VITE_HOST=0.0.0.0
+ENV VITE_PORT=10000
+
 # 開發時執行 dev server
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "10000"]

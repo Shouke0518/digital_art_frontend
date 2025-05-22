@@ -1,10 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import MainLayout from '../layouts/MainLayout.vue'
-import MuuView from '../views/muu.vue';
-import TestView from '../views/test.vue'
+import EchoView from '@/views/Echo.vue';
+import GenderView from '@/views/Gender.vue';
+import LotusView from '@/views/Lotus.vue';
+import MuuView from '../views/Muu.vue';
 import CaterpillarView from '@/views/Caterpillar.vue';
-import MouseCodeView from '@/views/MouseCode.vue';
 import CowView from '@/views/Cow.vue';
+import MouseCodeView from '@/views/MouseCode.vue';
+import TurtleView from '@/views/Turtle.vue';
 
 // 定義路由
 const routes = [
@@ -12,11 +15,14 @@ const routes = [
     path: '/',
     component: MainLayout,
     children: [
+      { path: '/echo',  component: EchoView },
+      { path: '/gender',  component: GenderView },
+      { path: '/lotus',  component: LotusView },
       { path: '/muu',  component: MuuView },
-      { path: '/test',  component: TestView },
       { path: '/caterpillar',  component: CaterpillarView },
+      { path: '/cow',  component: CowView },
       { path: '/mousecode',  component: MouseCodeView },
-      { path: '/cow',  component: CowView }
+      { path: '/turtle',  component: TurtleView }
     ]
 
   }
@@ -29,15 +35,5 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
-
-// // 設定 Navigation guards
-// router.beforeEach((to) => {
-//   const accessToken = useTokenStore().accessToken;
-
-//   // 來源不是登錄頁且沒有Token一律攔截去登錄頁
-//   if (to.name !== 'Login' && !accessToken) {
-//     return { name: 'Login' }
-//   }
-// })
 
 export default router;
