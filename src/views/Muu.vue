@@ -9,7 +9,7 @@
               :src="muuImage"
               class="mb-6"
               max-height="400"
-              cover
+              contain
             ></v-img>
   
             <v-card-text class="text-body-1 mb-6">
@@ -61,16 +61,15 @@
     // 模擬發送到後端
     console.log('提交答案:', answer.value)
     
-    // 檢查答案是否包含"紅"和"藍"
-    const hasRed = answer.value.includes('紅')
-    const hasBlue = answer.value.includes('藍')
+    // 檢查答案是否包含"23"
+    const hasTwentyThree = answer.value.includes('23')
     
-    if (hasRed && hasBlue) {
+    if (hasTwentyThree) {
       snackbar.color = 'success'
       snackbar.text = '答對了！'
     } else {
       snackbar.color = 'error'
-      snackbar.text = '再想想看！'
+      snackbar.text = '真菜啊你!'
     }
     
     snackbar.show = true

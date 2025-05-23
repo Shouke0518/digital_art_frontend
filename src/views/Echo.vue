@@ -9,7 +9,7 @@
             :src="echoImage"
             class="mb-6"
             max-height="400"
-            cover
+            contain
           ></v-img>
 
           <v-card-text class="text-body-1 mb-6">

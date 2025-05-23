@@ -16,19 +16,19 @@
     grow
   >
     <v-btn @click="handleSelect('/echo')">
-      <span>任務一</span>
+      <span>未定</span>
     </v-btn>
 
     <v-btn @click="handleSelect('/gender')">
-      <span>任務二</span>
+      <span>未定</span>
     </v-btn>
 
     <v-btn @click="handleSelect('/lotus')">
-      <span>任務三</span>
+      <span>未定</span>
     </v-btn>
 
     <v-btn @click="handleSelect('/muu')">
-      <span>任務四</span>
+      <span>未定</span>
     </v-btn>
   </v-bottom-navigation>
 </template>
