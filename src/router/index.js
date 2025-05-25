@@ -71,7 +71,8 @@ router.beforeEach((to, from, next) => {
       'caterpillar': '/caterpillar',
       'cow': '/cow',
       'mousecode': '/mousecode',
-      'turtle': '/turtle'
+      'turtle': '/turtle',
+      'task-completed': '/task-completed'
     }
 
     // 只有在當前路徑不是目標路徑時才重定向
