@@ -43,10 +43,10 @@ function normalizeTitle(str) {
 
 // 任務名稱映射（key 已標準化）
 const taskNameMap = {
-  '陌聲顯影機': 'echo',
-  'Re:Style-性別視角下的造型共創': 'gender',
-  '蓮花開～祝你有美好的一天': 'lotus',
-  'Muu': 'muu',
+  '《陌聲顯影機》': 'echo',
+  '《Re:Style-性別視角下的造型共創》': 'gender',
+  '《蓮花開～祝你有美好的一天》': 'lotus',
+  '《Muu》': 'muu',
   '霹靂毛蟲計數挑戰': 'caterpillar',
   '吹牛逼呢!!!你吹牛逼呢!!!': 'cow',
   '摩斯密碼解碼遊戲': 'mouseCode',
