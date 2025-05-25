@@ -7,6 +7,6 @@
         <v-main>
             <RouterView></RouterView>
         </v-main>
-        <Navigator></Navigator>
+        <!-- <Navigator></Navigator> -->
     </v-app>
 </template>

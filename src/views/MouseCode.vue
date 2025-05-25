@@ -8,6 +8,19 @@
           </v-card-title>
 
           <v-card-text class="text-center">
+            <v-img
+            :src="mousecodeImage"
+            class="mb-6"
+            max-height="400"
+            contain
+            ></v-img>
+            
+            <p class="text-body-1 mb-6">
+              請仔細聆聽音頻中的摩斯密碼，並解碼出正確的答案。
+              解出來的英數字是條碼號，
+              請根據條碼號去台科大圖書館找尋書名，去吧柯南!!。
+            </p>
+
             <audio
               ref="audioRef"
               src="/morse.wav"
@@ -47,7 +60,7 @@
               <v-col cols="12" sm="6" md="4">
                 <v-text-field
                   v-model="barcodeInput"
-                  label="請輸入條碼號"
+                  label="請輸入摩斯密碼解碼結果"
                   variant="outlined"
                   dense
                   hide-details
@@ -57,7 +70,7 @@
 
                 <v-text-field
                   v-model="bookTitleInput"
-                  label="請輸入書名"
+                  label="請輸入解碼後的書名"
                   variant="outlined"
                   dense
                   hide-details
@@ -77,16 +90,25 @@
               </v-col>
             </v-row>
 
-            <v-alert
-              v-if="showResult"
-              :type="isCorrect ? 'success' : 'error'"
+            <v-snackbar
+              v-model="snackbar"
+              :color="snackbarColor"
+              timeout="3000"
               class="mt-6 mx-auto"
               max-width="400"
               dense
               text
             >
-              {{ isCorrect ? '恭喜你答對了！' : '答案不正確，請再試一次！' }}
-            </v-alert>
+              {{ snackbarText }}
+              <template v-slot:actions>
+                <v-btn
+                  variant="text"
+                  @click="snackbar = false"
+                >
+                  關閉
+                </v-btn>
+              </template>
+            </v-snackbar>
           </v-card-text>
         </v-card>
       </v-col>
@@ -97,19 +119,20 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-
+import mousecodeImage from '@/assets/images/MouseCode.png'
 const router = useRouter()
 const audioRef = ref(null)
 const currentTime = ref(0)
 const duration = ref(0)
 const barcodeInput = ref('')
 const bookTitleInput = ref('')
-const isCorrect = ref(false)
-const showResult = ref(false)
+const snackbar = ref(false)
+const snackbarText = ref('')
+const snackbarColor = ref('error')
 const isPlaying = ref(false)
 
 const correctBarcode = 'C357658'
-const correctBookTitle = '摩斯密碼解碼書'
+const correctBookTitle = '你想活出怎樣的人生'
 
 const handleTimeUpdate = () => {
   if (audioRef.value) {
@@ -149,11 +172,21 @@ const togglePlay = () => {
 }
 
 const checkAnswer = () => {
-  if (barcodeInput.value === correctBarcode || bookTitleInput.value === correctBookTitle) {
-    isCorrect.value = true
-    showResult.value = true
+  const isBarcodeCorrect = barcodeInput.value.trim().toUpperCase() === correctBarcode
+  const isBookTitleCorrect = bookTitleInput.value.trim().includes(correctBookTitle)
+  
+  if (isBarcodeCorrect && isBookTitleCorrect) {
+    // 獲取標題
+    const title = document.querySelector('.v-card-title').textContent
+    // 直接跳轉到完成畫面
+    router.push({
+      path: '/task-completion',
+      query: { title }
+    })
   } else {
-    showResult.value = true
+    snackbarText.value = '答案不正確，請再試一次！'
+    snackbarColor.value = 'error'
+    snackbar.value = true
   }
 }
 

@@ -10,15 +10,15 @@
           <v-card-text class="text-center">
             <v-img
               :src="caterpillarImage"
-              alt="霹靂毛蟲"
-              max-width="800"
-              class="mx-auto"
+              class="mb-6"
+              max-height="400"
               contain
-              eager
             ></v-img>
 
             <v-card-text class="text-h6 mt-6">
-              請數一數這隻霹靂毛蟲有幾隻腳？
+              請找出台科的公共藝術裝置<br>
+              《 霹靂毛蟲 》<br>
+              並數一數總共有幾隻腳?
             </v-card-text>
 
             <v-row justify="center" class="mt-4">
@@ -48,16 +48,25 @@
               </v-col>
             </v-row>
 
-            <v-alert
-              v-if="showResult"
-              :type="isCorrect ? 'success' : 'error'"
+            <v-snackbar
+              v-model="snackbar"
+              :color="snackbarColor"
+              timeout="3000"
               class="mt-6 mx-auto"
               max-width="400"
               dense
               text
             >
-              {{ resultMessage }}
-            </v-alert>
+              {{ snackbarText }}
+              <template v-slot:actions>
+                <v-btn
+                  variant="text"
+                  @click="snackbar = false"
+                >
+                  關閉
+                </v-btn>
+              </template>
+            </v-snackbar>
           </v-card-text>
         </v-card>
       </v-col>
@@ -67,24 +76,31 @@
 
 <script setup>
 import { ref } from 'vue'
-import caterpillarImage from '@/assets/caterpillar.png'
+import { useRouter } from 'vue-router'
+import caterpillarImage from '@/assets/images/Caterpillar.png'
 
+const router = useRouter()
 const userAnswer = ref('')
 const correctAnswer = 32 // 假設正確答案是16隻腳
-const showResult = ref(false)
-const isCorrect = ref(false)
-const resultMessage = ref('')
+const snackbar = ref(false)
+const snackbarText = ref('')
+const snackbarColor = ref('error')
 
 const checkAnswer = () => {
   if (!userAnswer.value) return
   
-  showResult.value = true
-  isCorrect.value = parseInt(userAnswer.value) === correctAnswer
-  
-  if (isCorrect.value) {
-    resultMessage.value = '恭喜你答對了！🎉'
+  if (parseInt(userAnswer.value) === correctAnswer) {
+    // 獲取標題
+    const title = document.querySelector('.v-card-title').textContent
+    // 直接跳轉到完成畫面
+    router.push({
+      path: '/task-completion',
+      query: { title }
+    })
   } else {
-    resultMessage.value = '再試一次吧！💪'
+    snackbarText.value = '再試一次吧！💪'
+    snackbarColor.value = 'error'
+    snackbar.value = true
   }
 }
 </script>

@@ -49,12 +49,15 @@
   
   <script setup>
   import { ref, reactive } from 'vue'
+  import { useRouter } from 'vue-router'
   import muuImage from '@/assets/images/Muu.png'
+  
+  const router = useRouter()
   const answer = ref('')
   const snackbar = reactive({
     show: false,
     text: '',
-    color: 'success'
+    color: 'error'
   })
   
   const submitAnswer = () => {
@@ -65,14 +68,18 @@
     const hasTwentyThree = answer.value.includes('23')
     
     if (hasTwentyThree) {
-      snackbar.color = 'success'
-      snackbar.text = '答對了！'
+      // 獲取標題
+      const title = document.querySelector('h1').textContent
+      // 直接跳轉到完成畫面
+      router.push({
+        path: '/task-completion',
+        query: { title }
+      })
     } else {
       snackbar.color = 'error'
-      snackbar.text = '真菜啊你!'
+      snackbar.text = '再想想看！'
+      snackbar.show = true
     }
-    
-    snackbar.show = true
   }
   </script>
   

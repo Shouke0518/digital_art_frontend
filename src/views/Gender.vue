@@ -99,8 +99,10 @@
   
   <script setup>
   import { ref, reactive } from 'vue'
+  import { useRouter } from 'vue-router'
   import genderImage from '@/assets/images/Gender.png'
   
+  const router = useRouter()
   const questions = [
     {
       question: '哪一種穿著在歷史上曾經是男性的主流？',
@@ -143,16 +145,11 @@
   const snackbar = reactive({
     show: false,
     text: '',
-    color: 'success'
+    color: 'error'
   })
   
   const handleAnswer = () => {
-    console.log('點擊提交按鈕')
-    console.log('當前選擇的答案:', selectedAnswer.value)
-    console.log('正確答案:', questions[currentQuestion.value].correctAnswer)
-    
     if (!selectedAnswer.value) {
-      console.log('沒有選擇答案')
       snackbar.color = 'error'
       snackbar.text = '請選擇一個答案'
       snackbar.show = true
@@ -160,30 +157,31 @@
     }
 
     const isCorrect = selectedAnswer.value === questions[currentQuestion.value].correctAnswer
-    console.log('答案比對結果:', isCorrect)
 
     if (isCorrect) {
-      console.log('答對了')
       score.value++
-      snackbar.color = 'success'
-      snackbar.text = '答對了！'
-    } else {
-      console.log('答錯了')
-      snackbar.color = 'error'
-      snackbar.text = '真菜啊你!'
-    }
-    
-    snackbar.show = true
-
-    setTimeout(() => {
       if (currentQuestion.value < questions.length - 1) {
         currentQuestion.value++
         selectedAnswer.value = ''
         showKnowledge.value = false
       } else {
-        isCompleted.value = true
+        if (score.value >= 3) {
+          // 獲取標題
+          const title = document.querySelector('h1').textContent
+          // 直接跳轉到完成畫面
+          router.push({
+            path: '/task-completion',
+            query: { title }
+          })
+        } else {
+          isCompleted.value = true
+        }
       }
-    }, 2000)
+    } else {
+      snackbar.color = 'error'
+      snackbar.text = '再想想看！'
+      snackbar.show = true
+    }
   }
   
   const resetQuiz = () => {
