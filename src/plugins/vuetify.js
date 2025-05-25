@@ -1,12 +1,21 @@
 // plugins/vuetify.js
-import 'vuetify/styles'                        // globally load Vuetify’s base styles
+import 'vuetify/styles'                        // globally load Vuetify's base styles
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives  from 'vuetify/directives'
+import { aliases, mdi } from 'vuetify/iconsets/mdi'
+import '@mdi/font/css/materialdesignicons.css' // 引入 Material Design Icons 的 CSS
 
 export default createVuetify({
   components,
   directives,
+  icons: {
+    defaultSet: 'mdi',
+    aliases,
+    sets: {
+      mdi,
+    },
+  },
   theme: {
     defaultTheme: 'pixelPark',
     themes: {

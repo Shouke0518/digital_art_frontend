@@ -2,8 +2,8 @@
   <v-container fluid class="fill-height pa-0">
     <v-row no-gutters>
       <v-col cols="12">
-        <v-card flat>
-          <v-card-title class="text-h3 text-center justify-center py-6 primary--text custom-font">
+        <v-card elevation="0">
+          <v-card-title class="text-h3 text-center mb-4">
             霹靂毛蟲計數挑戰
           </v-card-title>
           
@@ -17,7 +17,7 @@
               eager
             ></v-img>
 
-            <v-card-text class="text-h6 mt-6 text--primary custom-font">
+            <v-card-text class="text-h6 mt-6">
               請數一數這隻霹靂毛蟲有幾隻腳？
             </v-card-text>
 
@@ -30,7 +30,7 @@
                   outlined
                   dense
                   hide-details
-                  class="mb-4 custom-font"
+                  class="mb-4"
                   @keyup.enter="checkAnswer"
                   :rules="[v => !!v || '請輸入數字']"
                   color="primary"
@@ -38,9 +38,8 @@
 
                 <v-btn
                   block
-                  color="secondary"
-                  class="white--text custom-font"
-                  :disabled="!userAnswer"
+                  color="primary"
+                  class="white--text"
                   @click="checkAnswer"
                   elevation="2"
                 >
@@ -52,7 +51,7 @@
             <v-alert
               v-if="showResult"
               :type="isCorrect ? 'success' : 'error'"
-              class="mt-6 mx-auto custom-font"
+              class="mt-6 mx-auto"
               max-width="400"
               dense
               text
@@ -71,7 +70,7 @@ import { ref } from 'vue'
 import caterpillarImage from '@/assets/caterpillar.png'
 
 const userAnswer = ref('')
-const correctAnswer = 16 // 假設正確答案是16隻腳
+const correctAnswer = 32 // 假設正確答案是16隻腳
 const showResult = ref(false)
 const isCorrect = ref(false)
 const resultMessage = ref('')
@@ -90,42 +89,31 @@ const checkAnswer = () => {
 }
 </script>
 
-<style>
-/* 全局樣式 */
-:root {
-  --custom-font: 'BoutiqueBitmap9x9', monospace;
+<style scoped>
+:deep(h1),
+:deep(h2),
+:deep(h3),
+:deep(p),
+:deep(.v-card-text),
+:deep(.v-card-title),
+:deep(.v-btn),
+:deep(.v-alert),
+:deep(.v-snackbar__content),
+:deep(.v-text-field),
+:deep(.v-text-field__input),
+:deep(.v-field__input),
+:deep(.v-field__outline),
+:deep(.v-field__outline__start),
+:deep(.v-field__outline__end),
+:deep(.v-field__outline__notch),
+:deep(.v-field__outline__notch__leading),
+:deep(.v-field__outline__notch__trailing),
+:deep(.v-field__outline__notch__label) {
+  font-family: "BoutiqueBitmap9x9";
 }
 
-.custom-font {
-  font-family: var(--custom-font) !important;
-}
-
-/* Vuetify 樣式覆蓋 */
-.v-application .primary--text {
-  color: #464B9D !important;
-}
-
-.v-application .secondary {
-  background-color: #F5A518 !important;
-  border-color: #F5A518 !important;
-}
-
-.v-application .text--primary {
-  color: #231815 !important;
-}
-
-/* 確保按鈕文字也使用自定義字體 */
-.v-btn {
-  font-family: var(--custom-font) !important;
-}
-
-/* 確保輸入框文字也使用自定義字體 */
-.v-text-field input {
-  font-family: var(--custom-font) !important;
-}
-
-/* 確保提示文字也使用自定義字體 */
-.v-alert {
-  font-family: var(--custom-font) !important;
+:deep(.v-snackbar__content) {
+  text-align: center;
+  justify-content: center;
 }
 </style>

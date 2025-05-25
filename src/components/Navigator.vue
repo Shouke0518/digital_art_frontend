@@ -15,19 +15,19 @@
 
     grow
   >
-    <v-btn @click="handleSelect('/echo')">
+    <v-btn @click="handleSelect('/caterpillar')">
       <span>未定</span>
     </v-btn>
 
-    <v-btn @click="handleSelect('/gender')">
+    <v-btn @click="handleSelect('/cow')">
       <span>未定</span>
     </v-btn>
 
-    <v-btn @click="handleSelect('/lotus')">
+    <v-btn @click="handleSelect('/mousecode')">
       <span>未定</span>
     </v-btn>
 
-    <v-btn @click="handleSelect('/muu')">
+    <v-btn @click="handleSelect('/turtle')">
       <span>未定</span>
     </v-btn>
   </v-bottom-navigation>
