@@ -58,27 +58,30 @@ router.beforeEach((to, from, next) => {
   const mission = urlParams.get('mission')
 
   // 如果有 LINE 參數
-  if (userId && name && mission) {
+  if (userId && name) {
     // 保存用戶資訊到 store
     userStore.setUserInfo(userId, name)
     
-    // 根據 mission 參數重定向到對應頁面
-    const missionRoutes = {
-      'echo': '/echo',
-      'gender': '/gender',
-      'lotus': '/lotus',
-      'muu': '/muu',
-      'caterpillar': '/caterpillar',
-      'cow': '/cow',
-      'mousecode': '/mousecode',
-      'turtle': '/turtle',
-      'task-completed': '/task-completed'
-    }
+    // 如果有 mission 參數，則進行重定向
+    if (mission) {
+      // 根據 mission 參數重定向到對應頁面
+      const missionRoutes = {
+        'echo': '/echo',
+        'gender': '/gender',
+        'lotus': '/lotus',
+        'muu': '/muu',
+        'caterpillar': '/caterpillar',
+        'cow': '/cow',
+        'mousecode': '/mousecode',
+        'turtle': '/turtle',
+        'task-completed': '/task-completed'
+      }
 
-    // 只有在當前路徑不是目標路徑時才重定向
-    if (missionRoutes[mission] && to.path !== missionRoutes[mission]) {
-      next(missionRoutes[mission])
-      return
+      // 只有在當前路徑不是目標路徑時才重定向
+      if (missionRoutes[mission] && to.path !== missionRoutes[mission]) {
+        next(missionRoutes[mission])
+        return
+      }
     }
   }
 

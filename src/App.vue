@@ -1,27 +1,32 @@
 <script setup>
 import { RouterView } from 'vue-router';
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useUserStore } from '@/stores/user'
 import apiClient from '@/api/api'
 
 const isCheckingUser = ref(false)
+const userStore = useUserStore()
 
-onMounted(async () => {
-  const userStore = useUserStore()
-  const userId = userStore.userId
-  const name = userStore.name
-  if (!userId || isCheckingUser.value) return
+// 監聽 userId 的變化
+watch(() => userStore.userId, async (newUserId) => {
+  if (!newUserId || isCheckingUser.value) {
+    console.log('watch - skipping: no userId or already checking')
+    return
+  }
   
   isCheckingUser.value = true
   try {
-    await apiClient.get(`/users/${userId}`)
+    console.log('watch - checking user:', newUserId)
+    await apiClient.get(`/users/${newUserId}`)
     console.log('user found')
     // 有找到就什麼都不做
   } catch (error) {
+    console.log('watch - error:', error.response?.status)
     if (error.response && error.response.status === 404) {
       try {
+        console.log('watch - creating user:', newUserId)
         await apiClient.post('/users/add', {
-          userId,
+          userId: newUserId,
           name: userStore.name,
           qualification: false,
           echo: false,
@@ -41,6 +46,11 @@ onMounted(async () => {
   } finally {
     isCheckingUser.value = false
   }
+}, { immediate: true })
+
+onMounted(() => {
+  console.log('App.vue onMounted - userId:', userStore.userId)
+  console.log('App.vue onMounted - name:', userStore.name)
 })
 </script>
 
