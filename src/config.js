@@ -1,2 +1,2 @@
 // 在 WSL 環境中使用 localhost
-export const API_BASE_URL = 'http://localhost:8080/api/';
+export const API_BASE_URL = 'https://digital-art-backend-nq89.onrender.com/api/';
