@@ -11,7 +11,6 @@
             max-height="400"
             contain
           ></v-img>
-
           <v-card-text class="text-body-1 mb-6">
             通訊軟體的出現，讓長輩們產生獨特的社交方式。無論颳風下雨，春夏秋冬，天天都能收到那一張——親愛的朋友，呷飽未？
 
@@ -23,6 +22,9 @@
           </v-card-text>
 
           <v-card-text>
+            <h2 class="text-left mb-4">用戶資訊：</h2>
+            <p class="text-left mb-4">userId：{{ userStore.userId }}</p>
+            <p class="text-left mb-4">name：{{ userStore.name }}</p>
             <h2 class="text-left mb-4">寫給想要祝福的人<br>想對他說祝福的話：</h2>
             <v-form @submit.prevent="submitWish">
               <v-text-field
