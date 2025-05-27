@@ -27,7 +27,7 @@ const routes = [
       { path: 'cow', component: CowView, beforeEnter: checkTaskCompleted('cow') },
       { path: 'mousecode', component: MouseCodeView, beforeEnter: checkTaskCompleted('mouseCode') },
       { path: 'turtle', component: TurtleView, beforeEnter: checkTaskCompleted('turtle') },
-      { path: 'task-completed', component: TaskCompletedView, beforeEnter: checkTaskCompleted('task-completed') }
+      { path: 'task-completed', component: TaskCompletedView}
     ]
   },
   {
@@ -92,9 +92,8 @@ function checkTaskCompleted(taskKey) {
     if (!userId) return next()
     try {
       const { data } = await apiClient.get(`/users/${userId}`)
+      next()
       if (data[taskKey]) {
-        next({ path: '/task-completed' })
-      } else if (taskKey === 'task-completed') {
         next({ path: '/task-completed' })
       } else {
         next()
