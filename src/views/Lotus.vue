@@ -22,18 +22,15 @@
           </v-card-text>
 
           <v-card-text>
-            <h2 class="text-left mb-4">用戶資訊：</h2>
-            <p class="text-left mb-4">userId：{{ userStore.userId }}</p>
-            <p class="text-left mb-4">name：{{ userStore.name }}</p>
             <h2 class="text-left mb-4">寫給想要祝福的人<br>想對他說祝福的話：</h2>
             <v-form @submit.prevent="submitWish">
-              <v-text-field
+              <!-- <v-text-field
                 v-model="formData.email"
                 label="收件信箱"
                 variant="outlined"
                 class="mb-4"
                 color="primary"
-              ></v-text-field>
+              ></v-text-field> -->
 
               <v-text-field
                 v-model="formData.recipient"
