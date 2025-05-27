@@ -94,6 +94,8 @@ function checkTaskCompleted(taskKey) {
       const { data } = await apiClient.get(`/users/${userId}`)
       if (data[taskKey]) {
         next({ path: '/task-completed' })
+      } else if (taskKey === 'task-completed') {
+        next({ path: '/task-completed' })
       } else {
         next()
       }
