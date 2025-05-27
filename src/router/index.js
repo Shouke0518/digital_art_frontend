@@ -8,6 +8,7 @@ import CaterpillarView from '@/views/Caterpillar.vue';
 import CowView from '@/views/Cow.vue';
 import MouseCodeView from '@/views/MouseCode.vue';
 import TurtleView from '@/views/Turtle.vue';
+import TaskCompletedView from '@/views/TaskCompleted.vue';
 import { useUserStore } from '../stores/user'
 import apiClient from '@/api/api'
 
@@ -25,7 +26,8 @@ const routes = [
       { path: 'caterpillar', component: CaterpillarView, beforeEnter: checkTaskCompleted('caterpillar') },
       { path: 'cow', component: CowView, beforeEnter: checkTaskCompleted('cow') },
       { path: 'mousecode', component: MouseCodeView, beforeEnter: checkTaskCompleted('mouseCode') },
-      { path: 'turtle', component: TurtleView, beforeEnter: checkTaskCompleted('turtle') }
+      { path: 'turtle', component: TurtleView, beforeEnter: checkTaskCompleted('turtle') },
+      { path: 'task-completed', component: TaskCompletedView, beforeEnter: checkTaskCompleted('task-completed') }
     ]
   },
   {
@@ -33,11 +35,6 @@ const routes = [
     name: 'TaskCompletion',
     component: () => import('@/views/TaskCompletion.vue')
   },
-  {
-    path: '/task-completed',
-    name: 'TaskCompleted',
-    component: () => import('@/views/TaskCompleted.vue')
-  }
 ];
 
 // 創建路由instance
